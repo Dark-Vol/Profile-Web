@@ -1,0 +1,198 @@
+@use "tokens" as *;
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin down($bp) {
+  @media (max-width: ($bp - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover:not(:disabled):not([aria-disabled="true"]) {
+      @content;
+    }
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-cyan;
+    outline-offset: 3px;
+  }
+}
+
+@mixin container {
+  width: calc(100% - #{$space-8});
+  max-width: $container-max;
+  margin-inline: auto;
+
+  @include up($bp-nav) {
+    width: calc(100% - #{($rail-width + $space-10) * 2});
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin reset-button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@mixin touch-target {
+  min-width: $touch-target;
+  min-height: $touch-target;
+}
+
+@mixin disabled {
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    @content;
+  }
+}
+
+@mixin section-title {
+  color: $color-text;
+  font-size: clamp(1.75rem, 1.5vw + 1.25rem, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  @supports (background-clip: text) {
+    background: linear-gradient(135deg, $color-text 40%, $color-cyan 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@mixin lead {
+  max-width: $measure;
+  color: $color-text-secondary;
+  font-size: $font-size-lg;
+}
+
+@mixin surface-card {
+  background: $color-glass;
+  border: 1px solid $color-line;
+  border-radius: $radius-md;
+  box-shadow: $shadow-2;
+}
+
+@mixin lift-on-hover {
+  transition:
+    transform $duration-normal,
+    border-color $duration-normal,
+    box-shadow $duration-normal;
+
+  @include hover {
+    border-color: rgba($color-cyan, 0.5);
+    transform: translateY(-4px);
+    box-shadow: $shadow-cyan;
+  }
+}
+
+@mixin bullet($color: $color-brand) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color;
+}
+
+@mixin field {
+  display: grid;
+  gap: $space-2;
+  min-width: 0;
+}
+
+@mixin field-label {
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  font-weight: 700;
+}
+
+@mixin field-control {
+  width: 100%;
+  min-height: $touch-target;
+  padding: $space-3 $space-4;
+  border: 1px solid $color-line-strong;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.05);
+  color: $color-text;
+  font: inherit;
+  font-size: $font-size-md;
+  line-height: 1.4;
+  transition:
+    border-color $duration-fast,
+    background $duration-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  @include hover {
+    border-color: rgba($color-text, 0.4);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-cyan;
+    outline-offset: 1px;
+    border-color: $color-cyan;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-brand;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+@mixin field-message {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: 1.45;
+}
+
+@mixin field-error {
+  @include field-message;
+  color: $color-error;
+
+  &::before {
+    content: "⚠ ";
+  }
+}
+
+@mixin field-hint {
+  @include field-message;
+  color: $color-text-tertiary;
+}
