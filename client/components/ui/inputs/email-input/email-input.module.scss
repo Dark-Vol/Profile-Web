@@ -1,0 +1,22 @@
+@use "abstracts" as *;
+
+.field {
+  @include field;
+}
+
+.label {
+  @include field-label;
+}
+
+.control {
+  @include field-control;
+  letter-spacing: 0.01em;
+}
+
+.hint {
+  @include field-hint;
+}
+
+.error {
+  @include field-error;
+}

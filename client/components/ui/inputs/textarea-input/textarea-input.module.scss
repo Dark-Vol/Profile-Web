@@ -1,0 +1,24 @@
+@use "abstracts" as *;
+
+.field {
+  @include field;
+}
+
+.label {
+  @include field-label;
+}
+
+.control {
+  @include field-control;
+  min-height: 140px;
+  resize: vertical;
+  line-height: $line-height-body;
+}
+
+.hint {
+  @include field-hint;
+}
+
+.error {
+  @include field-error;
+}
