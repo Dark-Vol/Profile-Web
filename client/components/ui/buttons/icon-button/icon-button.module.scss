@@ -1,0 +1,30 @@
+@use "abstracts" as *;
+
+.iconButton {
+  @include reset-button;
+  @include focus-ring;
+  display: grid;
+  place-items: center;
+  width: $touch-target;
+  height: $touch-target;
+  border-radius: $radius-xs;
+  color: $color-text;
+  font-size: 1.75rem;
+  line-height: 1;
+  transition: background $duration-fast;
+
+  @include hover {
+    background: $color-glass;
+  }
+
+  &:active {
+    background: $color-line;
+  }
+
+  @include disabled;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}

@@ -1,0 +1,40 @@
+@use "abstracts" as *;
+
+.tab {
+  @include reset-button;
+  @include touch-target;
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border: 1px solid $color-line;
+  border-radius: $radius-xs;
+  background: $color-glass;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  font-weight: 700;
+  transition:
+    color $duration-fast,
+    border-color $duration-fast,
+    background $duration-fast;
+
+  @include hover {
+    color: $color-text;
+    border-color: rgba($color-cyan, 0.4);
+  }
+
+  &[aria-selected="true"] {
+    color: $color-cyan;
+    background: rgba($color-cyan, 0.12);
+    border-color: $color-cyan;
+    box-shadow: inset 0 -3px 0 $color-cyan;
+  }
+
+  @include disabled;
+}
+
+.icon {
+  font-size: 1.1em;
+}

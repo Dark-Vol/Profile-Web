@@ -1,0 +1,45 @@
+@use "abstracts" as *;
+
+.toggle {
+  @include reset-button;
+  @include touch-target;
+  @include focus-ring;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-2 $space-3;
+  border-radius: $radius-xs;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: color $duration-fast;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: $space-3;
+    right: $space-3;
+    bottom: 8px;
+    height: 2px;
+    border-radius: $radius-pill;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform $duration-fast;
+  }
+
+  @include hover {
+    color: $color-text;
+  }
+
+  &[aria-pressed="true"] {
+    color: $color-cyan;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  @include disabled;
+}

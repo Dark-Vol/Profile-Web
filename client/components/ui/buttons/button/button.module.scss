@@ -1,0 +1,91 @@
+@use "abstracts" as *;
+
+.button {
+  @include reset-button;
+  @include touch-target;
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  font-size: $font-size-lg;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background $duration-fast,
+    color $duration-fast,
+    border-color $duration-fast,
+    transform $duration-fast;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  @include disabled;
+}
+
+.primary {
+  background: $color-brand-deep;
+  color: #ffffff;
+
+  @include hover {
+    background: $color-brand;
+    color: $color-surface-base;
+  }
+}
+
+.secondary {
+  border-color: $color-line-strong;
+  color: $color-text;
+
+  @include hover {
+    border-color: $color-cyan;
+    color: $color-cyan;
+  }
+}
+
+.ghost {
+  color: $color-text;
+
+  @include hover {
+    background: $color-glass;
+  }
+}
+
+.md {
+  padding: $space-3 $space-6;
+}
+
+.sm {
+  padding: $space-2 $space-4;
+  border-radius: $radius-xs;
+  font-size: $font-size-md;
+}
+
+.block {
+  width: 100%;
+}
+
+.loading {
+  cursor: progress;
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

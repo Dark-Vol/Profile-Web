@@ -1,0 +1,36 @@
+@use "abstracts" as *;
+
+.chat {
+  @include reset-button;
+  @include focus-ring;
+  position: fixed;
+  z-index: $z-chat;
+  right: $space-5;
+  bottom: $space-5;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: $color-cyan;
+  color: $color-surface-base;
+  box-shadow: $shadow-cyan;
+  transition: transform $duration-fast;
+
+  @include hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  :global(body.nav-open) & {
+    display: none;
+  }
+}

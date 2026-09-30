@@ -1,0 +1,43 @@
+@use "abstracts" as *;
+
+.burger {
+  @include reset-button;
+  @include focus-ring;
+  position: relative;
+  z-index: $z-nav + 1;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  width: $touch-target;
+  height: $touch-target;
+  padding: 10px;
+  border-radius: $radius-xs;
+
+  @include up($bp-nav) {
+    display: none;
+  }
+}
+
+.line {
+  display: block;
+  height: 3px;
+  border-radius: $radius-pill;
+  background: $color-text;
+  transition:
+    transform $duration-normal,
+    opacity $duration-fast;
+}
+
+.open {
+  .line:nth-of-type(2) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .line:nth-of-type(3) {
+    opacity: 0;
+  }
+
+  .line:nth-of-type(4) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

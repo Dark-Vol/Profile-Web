@@ -1,0 +1,51 @@
+@use "abstracts" as *;
+
+.trigger {
+  @include reset-button;
+  @include touch-target;
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  border-radius: $radius-xs;
+  color: $color-text;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color $duration-fast;
+
+  @include hover {
+    color: $color-brand;
+  }
+
+  &[aria-expanded="true"] {
+    color: $color-brand;
+  }
+
+  @include down($bp-nav) {
+    justify-content: space-between;
+    width: 100%;
+    padding: $space-3 $space-2;
+    font-size: $font-size-lg;
+  }
+}
+
+.current {
+  color: $color-brand;
+  box-shadow: inset 0 -2px 0 $color-brand;
+}
+
+.caret {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform $duration-fast;
+
+  .trigger[aria-expanded="true"] & {
+    transform: translateY(2px) rotate(-135deg);
+  }
+}
