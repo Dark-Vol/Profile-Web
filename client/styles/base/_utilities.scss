@@ -1,0 +1,32 @@
+@use "abstracts" as *;
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.skip {
+  position: absolute;
+  top: $space-3;
+  left: $space-4;
+  z-index: 1000;
+  padding: $space-3 $space-4;
+  border-radius: $radius-xs;
+  background: $color-cyan;
+  color: $color-surface-base;
+  font-weight: 700;
+  transform: translateY(-160%);
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+.lang {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+
+  > span {
+    color: $color-text-muted;
+  }
+}

@@ -1,0 +1,44 @@
+@use "abstracts" as *;
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-weight: 700;
+  line-height: $line-height-heading;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.accent {
+  color: $color-brand;
+  text-shadow: 0 0 8px rgba($color-brand, 0.35);
+}
+
+.cyan {
+  color: $color-cyan;
+  text-shadow: 0 0 8px rgba($color-cyan, 0.35);
+}
+
+.section-title {
+  @include section-title;
+}
+
+.lead {
+  @include lead;
+}
+
+.kicker {
+  margin-bottom: $space-3;
+  color: $color-cyan;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}

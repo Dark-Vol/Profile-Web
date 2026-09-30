@@ -1,0 +1,138 @@
+@use "abstracts" as *;
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100dvh;
+  padding-block: 140px $space-16;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -80px;
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($color-cyan, 0.14), transparent 70%);
+    pointer-events: none;
+  }
+
+  h1 {
+    max-width: 24ch;
+    margin: 0 auto $space-12;
+    font-size: clamp(1.9rem, 2.4vw + 1.1rem, 3.25rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.hero-inner {
+  @include container;
+  position: relative;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-6;
+
+  @include down($bp-lg) {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+}
+
+.card {
+  @include surface-card;
+  @include lift-on-hover;
+  display: flex;
+  flex-direction: column;
+  padding: $space-8;
+  animation: rise 600ms both;
+
+  h2 {
+    margin-bottom: $space-4;
+    padding-left: $space-4;
+    border-left: 4px solid $color-cyan;
+    font-size: $font-size-2xl;
+  }
+
+  ul {
+    flex: 1;
+    margin-bottom: $space-6;
+    list-style: none;
+  }
+
+  li a {
+    @include focus-ring;
+    position: relative;
+    display: block;
+    padding: 10px 0 10px 20px;
+    border-radius: $radius-xs;
+    font-size: $font-size-lg;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      color $duration-fast,
+      transform $duration-fast;
+
+    &::before {
+      @include bullet;
+      top: 1.05em;
+    }
+
+    @include hover {
+      color: $color-cyan;
+      transform: translateX(4px);
+    }
+  }
+}
+
+.card-more {
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: $space-2;
+  min-height: $touch-target;
+  color: $color-cyan;
+  font-size: $font-size-md;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+
+  .arrow {
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform $duration-fast;
+  }
+
+  @include hover {
+    color: $color-text;
+
+    .arrow {
+      transform: translateX(3px) rotate(45deg);
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

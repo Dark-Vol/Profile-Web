@@ -1,0 +1,171 @@
+@use "abstracts" as *;
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: $z-header;
+  background: $color-surface;
+}
+
+.header-bar {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  padding-block: $space-4;
+  border-bottom: 2px solid $color-brand;
+}
+
+.logo {
+  @include focus-ring;
+  position: relative;
+  z-index: $z-nav + 1;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: clamp(1.6rem, 1.5vw + 1rem, 2.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.logo-ti {
+  color: $color-brand;
+}
+
+.logo-code {
+  color: $color-text;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+
+  > ul {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    list-style: none;
+  }
+}
+
+.nav-link {
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  min-height: $touch-target;
+  padding: $space-2 $space-3;
+  border-radius: $radius-xs;
+  color: $color-text;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color $duration-fast;
+
+  @include hover {
+    color: $color-brand;
+  }
+
+  &[aria-current="page"] {
+    color: $color-brand;
+    box-shadow: inset 0 -2px 0 $color-brand;
+  }
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+  display: grid;
+  min-width: 280px;
+  padding: $space-2;
+  list-style: none;
+  background: $color-surface-raised;
+  border: 1px solid $color-line-strong;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-2;
+
+  .nav-link {
+    width: 100%;
+    font-size: $font-size-md;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+
+    @include hover {
+      color: $color-text;
+      background: rgba($color-brand, 0.14);
+    }
+
+    &[aria-current="page"] {
+      box-shadow: inset 3px 0 0 $color-brand;
+    }
+  }
+}
+
+@include down($bp-nav) {
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: $z-nav;
+    flex-direction: column;
+    align-items: stretch;
+    gap: $space-6;
+    padding: 96px $space-6 $space-10;
+    background: rgba($color-surface, 0.98);
+    overflow-y: auto;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition:
+      transform $duration-normal,
+      visibility 0s linear $duration-normal;
+
+    &.is-open {
+      visibility: visible;
+      transform: none;
+      transition: transform $duration-normal;
+    }
+
+    > ul {
+      flex-direction: column;
+      align-items: stretch;
+      width: min(480px, 100%);
+      margin-inline: auto;
+      gap: 0;
+    }
+
+    > ul > li {
+      border-bottom: 1px solid $color-line;
+    }
+
+    > ul > li > .nav-link {
+      width: 100%;
+      padding: $space-3 $space-2;
+      font-size: $font-size-lg;
+    }
+
+    .lang {
+      width: min(480px, 100%);
+      margin-inline: auto;
+    }
+  }
+
+  .dropdown-menu {
+    position: static;
+    min-width: 0;
+    margin-bottom: $space-3;
+    padding: 0 0 0 $space-3;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+}

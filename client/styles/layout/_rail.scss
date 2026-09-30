@@ -1,0 +1,48 @@
+@use "abstracts" as *;
+
+.rail {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: $z-rail;
+  transform: translateY(-50%);
+
+  ul {
+    list-style: none;
+  }
+
+  li:first-child a {
+    border-top-right-radius: $radius-xs;
+  }
+
+  li:last-child a {
+    border-bottom-right-radius: $radius-xs;
+  }
+
+  a {
+    @include focus-ring;
+    display: grid;
+    place-items: center;
+    width: $rail-width;
+    height: $rail-width;
+    background: rgba($color-surface, 0.85);
+    color: $color-brand;
+    transition:
+      background $duration-normal,
+      color $duration-normal;
+
+    @include hover {
+      background: $color-cyan;
+      color: $color-surface;
+    }
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  @include down($bp-nav) {
+    display: none;
+  }
+}

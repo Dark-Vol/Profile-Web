@@ -1,0 +1,63 @@
+$color-text: #e4e4e4;
+$color-text-secondary: #c4c4c4;
+$color-text-tertiary: #b0b0b0;
+$color-text-muted: #8f8f8f;
+$color-surface-base: #000000;
+$color-surface: #111111;
+$color-surface-raised: #1a1a1a;
+$color-cyan: #00c2ff;
+$color-brand: #fd0037;
+$color-brand-deep: #ca002c;
+$color-error: #ff8fa3;
+$color-line: rgba(228, 228, 228, 0.14);
+$color-line-strong: rgba(228, 228, 228, 0.26);
+$color-glass: rgba(228, 228, 228, 0.04);
+
+$font-family: Arial, sans-serif;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+$line-height-body: 1.65;
+$line-height-heading: 1.2;
+$measure: 68ch;
+
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-8: 32px;
+$space-10: 40px;
+$space-12: 48px;
+$space-16: 64px;
+$space-20: 80px;
+
+$radius-xs: 8px;
+$radius-sm: 12px;
+$radius-md: 14px;
+$radius-pill: 50px;
+
+$shadow-1: rgba(0, 20, 50, 0.2) 0 5px 15px, rgba(0, 20, 50, 0.1) 0 2px 5px;
+$shadow-2: rgba(17, 17, 17, 0.4) 0 4px 20px;
+$shadow-cyan: rgba(0, 194, 255, 0.3) 0 4px 20px;
+
+$duration-fast: 200ms;
+$duration-normal: 300ms;
+
+$touch-target: 44px;
+$container-max: 1280px;
+$rail-width: 52px;
+
+$bp-sm: 640px;
+$bp-md: 860px;
+$bp-nav: 1024px;
+$bp-lg: 1200px;
+
+$z-rail: 30;
+$z-header: 40;
+$z-chat: 45;
+$z-nav: 50;

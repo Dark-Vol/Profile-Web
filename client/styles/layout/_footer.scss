@@ -1,0 +1,143 @@
+@use "abstracts" as *;
+
+.footer {
+  border-top: 2px solid $color-brand;
+  background: linear-gradient(135deg, #0a0a0a, $color-surface-raised);
+
+  h2 {
+    position: relative;
+    margin-bottom: $space-4;
+    padding-bottom: $space-2;
+    font-size: $font-size-md;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 24px;
+      height: 2px;
+      background: $color-brand;
+    }
+  }
+}
+
+.footer-inner {
+  @include container;
+  padding-block: $space-16 $space-8;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr 1.2fr;
+  gap: $space-10;
+
+  @include down($bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-lead {
+  max-width: 42ch;
+  margin-block: $space-4;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-8 $space-6;
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    @include focus-ring;
+    display: inline-block;
+    padding-block: $space-2;
+    color: $color-text-tertiary;
+    font-size: $font-size-md;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      color $duration-fast,
+      transform $duration-fast;
+
+    @include hover {
+      color: $color-text;
+      transform: translateX(4px);
+    }
+  }
+
+  @include down($bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-social {
+  display: flex;
+  gap: $space-2;
+  list-style: none;
+
+  a {
+    @include focus-ring;
+    display: grid;
+    place-items: center;
+    width: $touch-target;
+    height: $touch-target;
+    border-radius: $radius-xs;
+    background: $color-glass;
+    color: $color-brand;
+    transition:
+      background $duration-fast,
+      color $duration-fast;
+
+    @include hover {
+      background: $color-cyan;
+      color: $color-surface;
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.newsletter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: $space-3;
+
+  > :first-child {
+    flex: 1 1 220px;
+  }
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-top: $space-10;
+  padding-top: $space-5;
+  border-top: 1px solid $color-line;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+
+  span {
+    display: block;
+    color: $color-text-muted;
+  }
+
+  a {
+    @include focus-ring;
+    color: $color-text;
+  }
+}

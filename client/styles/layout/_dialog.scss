@@ -1,0 +1,39 @@
+@use "abstracts" as *;
+
+.dialog {
+  width: min(560px, calc(100% - #{$space-8}));
+  max-height: calc(100dvh - #{$space-8});
+  padding: 0;
+  border: 1px solid $color-line-strong;
+  border-radius: $radius-md;
+  background: $color-surface;
+  color: $color-text;
+  box-shadow: $shadow-1;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+  }
+}
+
+.dialog-panel {
+  display: grid;
+  gap: $space-5;
+  padding: $space-6;
+}
+
+.dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+
+  h2 {
+    font-size: $font-size-2xl;
+  }
+}
+
+.dialog-lead {
+  margin-top: -$space-2;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}

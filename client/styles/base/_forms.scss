@@ -1,0 +1,11 @@
+@use "abstracts" as *;
+
+.form-success {
+  margin-top: $space-3;
+  color: $color-cyan;
+  font-size: $font-size-md;
+
+  &::before {
+    content: "✓ ";
+  }
+}
