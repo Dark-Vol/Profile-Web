@@ -106,6 +106,7 @@ export type UiCopy = {
   contactMessageError: string;
   contactMessageHint: string;
   contactSuccess: string;
+  contactError: string;
   navLabel: string;
   homeTitle: string;
   cardMore: string;
