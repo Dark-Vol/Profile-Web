@@ -1,11 +1,10 @@
 "use client";
 
 import { createContext, useContext, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { contacts } from "@/lib/site";
+import useChat from "@/hooks/useChat";
 import {
   CONTACT_MESSAGE_MIN,
   hasErrors,
-  openMailto,
   useModel,
   validateContact,
   type ContactErrors,
@@ -36,7 +35,8 @@ export function ContactProvider({ children }: { children: ReactNode }) {
   const email = useModel("");
   const message = useModel("");
   const [errors, setErrors] = useState<ContactErrors>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { sendTicket } = useChat();
 
   function clearingError(model: Model<string>, key: keyof ContactValues): Model<string> {
     return {
@@ -63,7 +63,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
     dialogRef.current?.close();
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = { name: name.value, email: email.value, message: message.value };
     const next = validateContact(values, {
@@ -81,12 +81,19 @@ export function ContactProvider({ children }: { children: ReactNode }) {
     }
 
     setStatus("loading");
-    openMailto(
-      contacts.email,
-      `TI Code — ${values.name.trim()}`,
-      `${values.name.trim()}\n${values.email.trim()}\n\n${values.message.trim()}`,
-    );
-    window.setTimeout(() => setStatus("success"), 400);
+    try {
+      await sendTicket({
+        name: values.name.trim(),
+        email: values.email.trim(),
+        message: values.message.trim(),
+      });
+      setStatus("success");
+      name.onChange("");
+      email.onChange("");
+      message.onChange("");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -139,6 +146,11 @@ export function ContactProvider({ children }: { children: ReactNode }) {
           {status === "success" ? (
             <p className="form-success" role="status">
               {t.contactSuccess}
+            </p>
+          ) : null}
+          {status === "error" ? (
+            <p className="form-error" role="alert">
+              {t.contactError}
             </p>
           ) : null}
           <Button type="submit" block loading={status === "loading"} loadingLabel={t.contactSending}>
