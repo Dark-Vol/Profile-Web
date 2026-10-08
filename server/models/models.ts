@@ -3,13 +3,15 @@ import sequelize from "@config/db";
 import {
   SupportAttributes,
   MessageAttributes,
-  UserAttributes.
-  AdministratorAttributes
+  UserAttributes,
+  AdministratorAttributes,
 } from "../types";
 
 export const Support = sequelize.define<Model<SupportAttributes>>("Support", {
+  name: { type: DataTypes.STRING(255), allowNull: false },
+  email: { type: DataTypes.STRING(255), allowNull: false },
   title: { type: DataTypes.STRING(255), allowNull: false },
-  body: { type: DataTypes.STRING(255), allowNull: false },
+  body: { type: DataTypes.TEXT, allowNull: false },
   statusClose: { type: DataTypes.BOOLEAN, defaultValue: false },
   statusAnswer: { type: DataTypes.BOOLEAN, defaultValue: false },
   answer: { type: DataTypes.STRING(255) },
@@ -18,6 +20,7 @@ export const Support = sequelize.define<Model<SupportAttributes>>("Support", {
 export const Message = sequelize.define<Model<MessageAttributes>>("Message", {
   text: { type: DataTypes.TEXT, allowNull: false },
   room: { type: DataTypes.INTEGER, allowNull: false },
+  role: { type: DataTypes.STRING(32), allowNull: false, defaultValue: "User" },
   status: { type: DataTypes.BOOLEAN, defaultValue: false },
   isRead: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
